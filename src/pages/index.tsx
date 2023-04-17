@@ -1,36 +1,60 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import DOMPurify from 'dompurify';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Checklist from './components/Checklist';
 // import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const services = {
+  id: 'services',
+  headerText: 'Services and Amenities',
+  descriptionText: 'Our services and amenities are designed to make your travel easy, your stay comfortable, and your experience one-of-a-kind.',
+  items: [
+    'Indoor pool',
+    '24-hour fitness center',
+    'Massage therapy',
+    'Full service spa',
+    'In-room jacuzzi tubs',
+    'Rooftop caf&eacute;  &amp; smoothie bar',
+    'Coffee bar  &amp; pastry shop',
+    'Traditional continental breakfast',
+    '24-hour concierge service',
+    'Business center',
+    'Complimentary wireless service',
+    'Laundry &amp; dry cleaning service',
+    'Daily paper',
+    'Certified &quot;green&quot; hotel',
+    'Pet-friendly rooms  &amp; common areas'
+  ].map(a => DOMPurify.sanitize(a))
+};
+const accessibility = {
+  id: 'accessibility',
+  headerText: 'Accessibility',
+  descriptionText: 'We&apos;re committed to maintaining the same quality of service for every individual. We offer the following facilities for those with special needs:',
+  items: [
+    'Grab bars on tub walls',
+    'Shower chairs',
+    'Hand held shower sprayers',
+    'Higher toilets &amp; toilet modifiers',
+    'Lower sink faucet handles',
+    'Wheelchair clearance under sinks &amp; vanity',
+    'Lower racks in closet',
+    'TDD machines',
+    'Telephone light signalers  &amp; smoke alarms',
+    'Telephone amplification handsets',
+    'Closed captioned television converters',
+    'Vibrating alarm clocks',
+    'Telephones with volume control',
+  ].map(a => DOMPurify.sanitize(a))
+}
 export default function Home() {
   return (
     <div className="App">
-      <header id="intro">
-        <article className="fullheight">
-          <div className="hgroup">
-            <h1>Landon Hotel</h1>
-            <h2>West London</h2>
-            <p><a href="#welcome"><img src="https://landonhotel.com/images/misc/arrow.png" alt="down arrow" /></a></p>
-          </div>
-        </article>
-
-        <nav id="nav">
-          <div className="navbar">
-            <div className="brand"><a href="#welcome">Landon <span>Hotel</span></a></div>
-            <ul>
-              <li><a className="icon info" href="#hotelinfo"><span>info</span></a></li>
-              <li><a className="icon rooms" href="#rooms"><span>rooms</span></a></li>
-              <li><a className="icon dining" href="#dining"><span>dining</span></a></li>
-              <li><a className="icon events" href="#events"><span>events</span></a></li>
-              <li><a className="icon attractions" href="#attractions"><span>attractions</span></a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
+      <Header />
       <main id="wrapper">
         <div className="scene" id="welcome">
           <article className="content">
@@ -62,46 +86,18 @@ export default function Home() {
                 <li><strong>Pet Policy:</strong> Pets of all sizes and types are allowed in designated pet rooms, and the specified common areas. Service animals are allowed everywhere.</li>
               </ul>
             </section>
-            <section className="checklist" id="services">
-              <h2>Services and Amenities</h2>
-              <p>Our services and amenities are designed to make your travel easy, your stay comfortable, and your experience one-of-a-kind.</p>
-              <ul>
-                <li>Indoor pool</li>
-                <li>24-hour fitness center</li>
-                <li>Massage therapy</li>
-                <li>Full service spa</li>
-                <li>In-room jacuzzi tubs</li>
-                <li>Rooftop café  &amp; smoothie bar</li>
-                <li>Coffee bar  &amp; pastry shop</li>
-                <li>Traditional continental breakfast</li>
-                <li>24-hour concierge service</li>
-                <li>Business center</li>
-                <li>Complimentary wireless service</li>
-                <li>Laundry &amp; dry cleaning service</li>
-                <li>Daily paper</li>
-                <li>Certified &quot;green&quot; hotel</li>
-                <li>Pet-friendly rooms  &amp; common areas</li>
-              </ul>
-            </section>
-            <section className="checklist" id="accessibility">
-              <h2>Accessibility</h2>
-              <p>We&apos;re committed to maintaining the same quality of service for every individual. We offer the following facilities for those with special needs:</p>
-              <ul>
-                <li>Grab bars on tub walls</li>
-                <li>Shower chairs</li>
-                <li>Hand held shower sprayers</li>
-                <li>Higher toilets &amp; toilet modifiers</li>
-                <li>Lower sink faucet handles</li>
-                <li>Wheelchair clearance under sinks &amp; vanity</li>
-                <li>Lower racks in closet</li>
-                <li>TDD machines</li>
-                <li>Telephone light signalers  &amp; smoke alarms</li>
-                <li>Telephone amplification handsets</li>
-                <li>Closed captioned television converters</li>
-                <li>Vibrating alarm clocks</li>
-                <li>Telephones with volume control</li>
-              </ul>
-            </section>
+            <Checklist
+              id={services.id}
+              headerText={services.headerText}
+              descriptionText={services.descriptionText}
+              items={services.items}  
+            />
+            <Checklist
+              id={accessibility.id}
+              headerText={accessibility.headerText}
+              descriptionText={accessibility.descriptionText}
+              items={accessibility.items}  
+            />
           </article>
           <article id="greenprogram">
             <h2>Landon Green Program</h2>
@@ -110,17 +106,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="scene">
-        <article className="content">
-          <div id="socialmedia">
-            <ul className="group">
-              <li><a href="https://twitter.com"><img className="icon" src="https://landonhotel.com/images/socialmedia/twitter.png" alt="icon for twitter" /></a></li>
-              <li><a href="http://www.facebook.com"><img className="icon" src="https://landonhotel.com/images/socialmedia/facebook.png" alt="icon for facebook" /></a></li>
-              <li><a href="http://www.youtube.com"><img className="icon" src="https://landonhotel.com/images/socialmedia/youtube.png" alt="icon for youtube" /></a></li>    
-            </ul>      
-          </div>
-        </article>
-      </footer>
+      <Footer />
     </div>
   );
 }
